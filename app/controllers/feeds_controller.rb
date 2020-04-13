@@ -41,7 +41,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
-        ContactMailer.contact_mail(@feed).deliver  ##追記
+        # ContactMailer.contact_mail(@feed).deliver  ##追記
         format.html { redirect_to @feed, notice: '更新されました' }
         format.json { render :show, status: :created, location: @feed }
       else
