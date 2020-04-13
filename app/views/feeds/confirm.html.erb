@@ -8,6 +8,7 @@
   <%= form.hidden_field :image_cache %>
   <td><%= form.label :comment %></td>
   <td><%= form.text_field :comment %></td>
+  </table>
   <td><%= form.submit "投稿する" %></td>
 <% end %>
 <%= form_with(model:@feed, url:new_feed_path, local:true, method:"get") do |form| %>
@@ -16,4 +17,3 @@
 <% end %>
 
 </div>
-</table>

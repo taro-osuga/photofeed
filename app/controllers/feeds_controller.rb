@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  # before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   # GET /feeds
   # GET /feeds.json
