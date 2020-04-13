@@ -1,0 +1,19 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+  <table class="table table-bordered">
+  <tr><strong>Image:</strong></tr>
+  <td><%= image_tag @feed.image.url %></td>
+  <td><%=@feed.comment %></td>
+  <td><%=@feed.user.name %></td>
+  </table>
+  <% unless @feed.user_id == current_user.id %>
+    <% if @favorite.present? %>
+    <td><%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %></td>
+  <% else %>
+    <td><%= link_to 'お気に入り登録する', favorites_path(feed_id: @feed.id), method: :post, class: 'btn btn-primary' %></td>
+  <% end %>
+  <% end %>
+</div>
+
+
+

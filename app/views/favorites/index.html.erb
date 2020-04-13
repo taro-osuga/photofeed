@@ -1,0 +1,24 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+<h1 button class="btn btn-primary" disabled="disabled">お気に入り投稿一覧</h1>
+<table class="table">
+<table class="table table-bordered">
+ <ul class="row">
+    <% @favorites.each do |favorite| %>
+    <tbody>
+        <td><%=image_tag favorite.feed.image.url(:thumb)%></td>
+        <td><%=favorite.feed.comment %></td>
+        <td><%=favorite.feed.user.name %>  <%=image_tag favorite.feed.user.image_name.url(:thumb)%></td>
+        <td><button class="btn btn-default"><%= link_to 'Show', feed_path(favorite.feed.id) %></button></td>
+        <% if favorite.user_id != current_user.id %>
+        <td><button class="btn btn-default"><%= link_to 'Edit', edit_feed_path(favorite.feed.id) %></button></td>
+        <td><button class="btn btn-default"><%= link_to 'Destroy', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+        <% end %>
+        <% end %>
+    </tbody>
+   </ul>
+    </table>
+    </table>
+
+
+</div>

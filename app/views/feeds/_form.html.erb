@@ -1,0 +1,27 @@
+<%= form_with(model: feed, local: true, url:choose_new_or_edit) do |form| %>
+<div class="container">
+<% if @feed.errors.any? %>
+  <div id="error_explanation">
+    <p><%= pluralize(@feed.errors.count, "error") %></p>
+    <ul>
+    <% @feed.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<table class="table table-bordered">
+   <td><%= form.label :image %></td>
+    <td><%= image_tag (@feed.image.url) if @feed.image && @feed.image.url %></td>
+    <td><%= form.file_field :image %></td>
+    <%= form.hidden_field :image_cache %>
+    <td><%= form.label :comment %></td>
+    <td><%= form.text_field :comment %></td>
+  </table>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+    </div>
+<% end %>

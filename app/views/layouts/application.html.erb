@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PHOTOFEED</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width">
+  </head>
+
+  <body>
+  <header>
+  <div class="header-logo">
+  <p>PHOTOFEED</p>
+  </div>
+  <ul class="header-menus">
+
+    <% if logged_in? %>
+      <li>
+      <%= link_to "新規投稿画面へ", new_feed_path %>
+      </li>
+      <li>
+      <%= link_to "投稿一覧画面へ", feeds_path %>
+      </li>
+      <li>
+      <%= link_to "お気に入り一覧画面へ", favorites_path %>
+      </li>
+      <li>
+      <%= link_to "マイページへ", user_path(current_user.id) %>
+      </li>
+      <li>
+      <%= link_to "ユーザー一覧へ", users_path %>
+      </li>
+      <li>
+      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      </li>
+    <% else %>
+      <li>
+      <a><%= link_to "新規登録", new_user_path %></a>
+      </li>
+      <li>
+      <a><%= link_to "Login", new_session_path %></a>
+      </li>
+    <% end %>
+    </ul>
+    </header>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+     <%= yield %>
+     
+    </body>
+  
+</html>
+
+

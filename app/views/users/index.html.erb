@@ -1,0 +1,12 @@
+<div class="container">
+    <h1 button class="btn btn-primary">ユーザー一覧</h1>
+    <% @users.each do |user|%>
+        <table class="table">
+        <table class="table table-bordered">
+          <td><%=image_tag user.image_name.url(:thumb)%></td>
+          <td><%= user.name%></td>
+          <td><%= user.email%></td>
+        </table>
+        </table>
+    <% end %>
+</div>

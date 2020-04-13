@@ -1,0 +1,23 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+<td><%=image_tag @user.image_name.url(:thumb) if @user.image_name?%></td>
+<h1 button class="btn btn-primary"><%= @user.name %>のページ</h1>
+<% if @user.id == current_user.id %>
+<h1 button class="btn"><%= link_to 'ユーザー情報編集', edit_user_path(current_user.id) %></h1>
+<% end %>
+<table class="table">
+<table class="table table-bordered">
+ <ul class="row">
+    <% @user.feeds.all.order(created_at: :desc).each do |feed| %>
+    <tbody>
+        <td><%=image_tag feed.image.url(:thumb) %></td>
+        <td><%=feed.comment %></td>
+        <td><button class="btn btn-default"><%= link_to 'Show', feed %></button></td>
+        <td><button class="btn btn-default"><%= link_to 'Edit', edit_feed_path(feed) %></button></td>
+        <td><button class="btn btn-default"><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+<% end %>
+</tbody>
+</ul>
+</table>
+</table>
+</div>
