@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_correct_user, {only: [ :update, :destroy]}
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   # GET /feeds
   # GET /feeds.json
@@ -41,7 +41,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
-        # ContactMailer.contact_mail(@feed).deliver  ##追記
+        ContactMailer.contact_mail(@feed).deliver  ##追記
         format.html { redirect_to @feed, notice: '更新されました' }
         format.json { render :show, status: :created, location: @feed }
       else
