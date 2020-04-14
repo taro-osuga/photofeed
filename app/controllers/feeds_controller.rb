@@ -1,7 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
-
+  
   # GET /feeds
   # GET /feeds.json
   def index
@@ -75,13 +74,6 @@ class FeedsController < ApplicationController
     end
   end
 
-  def ensure_correct_user
-    @feed = Feed.find_by(id: params[:id])
-    if @feed.user.id == @current_user_id
-      flash[:notice] = "権限がありません"
-      redirect_to feed_path
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -93,8 +85,9 @@ class FeedsController < ApplicationController
   def feed_params
     params.require(:feed).permit(:image, :image_cache, :comment)
   end
-  end
 
+
+end
 
 
 

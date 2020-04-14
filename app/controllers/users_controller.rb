@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-    # before_action :authenticate_user, {only: [:edit, :update]}
+    before_action :ensure_correct_user, {only: [:show, :edit, :update]}
+
     def show
         @user = User.find(params[:id])
     end
@@ -34,18 +35,20 @@ class UsersController < ApplicationController
             render :edit
         end
     end
-
-    def ensure_correct_user
-        if @current_user.id !=  params[:id].to_i
-         redirect_to("/posts/index")
-        end
-      end
-
+    
     private
   
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation,:image_name)
     end
+
+    def ensure_correct_user
+        @user = User.find(params[:id])
+        if current_user.id != @user.id
+          flash[:notice] = "権限がありません"
+          redirect_to feeds_path
+        end
     end
 
+end
