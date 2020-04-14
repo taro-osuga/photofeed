@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, {only: [:edit, :update]}
   
   # GET /feeds
   # GET /feeds.json
@@ -86,6 +87,12 @@ class FeedsController < ApplicationController
     params.require(:feed).permit(:image, :image_cache, :comment)
   end
 
+  def ensure_correct_user
+    if current_user.id != @feed.user.id
+      flash[:notice] = "編集権限がありません"
+      redirect_to feeds_path
+    end
+  end
 
 end
 
